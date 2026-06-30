@@ -1,0 +1,37 @@
+@font-face {
+    font-family: "flaticon_yacht";
+    src: url("../fonts/flaticon_yacht.ttf?0b522d3465efa65725f965e81994ed46") format("truetype"),
+url("../fonts/flaticon_yacht.woff?0b522d3465efa65725f965e81994ed46") format("woff"),
+url("../fonts/flaticon_yacht.woff2?0b522d3465efa65725f965e81994ed46") format("woff2"),
+url("../fonts/flaticon_yacht.eot?0b522d3465efa65725f965e81994ed46#iefix") format("embedded-opentype"),
+url("../fonts/flaticon_yacht.svg?0b522d3465efa65725f965e81994ed46#flaticon_yacht") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon_yacht !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.flaticon-customer-service:before {
+    content: "\f101";
+}
+.flaticon-lifebuoy:before {
+    content: "\f102";
+}
+.flaticon-anchor:before {
+    content: "\f103";
+}
+.flaticon-sailing-boat:before {
+    content: "\f104";
+}
+.flaticon-anchor-1:before {
+    content: "\f105";
+}
+.flaticon-ship:before {
+    content: "\f106";
+}

@@ -1,0 +1,11 @@
+img[loading="lazy"] {
+    content-visibility: auto;
+}
+
+[data-bg-lazy]:not(.bg-lazy-loaded) {
+    background-color: #f4f4f4;
+}
+
+.bg-lazy-loaded {
+    transition: opacity 0.3s ease;
+}
