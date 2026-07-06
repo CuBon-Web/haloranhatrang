@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="page-title">Sửa hải trình</h3>
+    <h3 class="page-title">Sửa dịch vụ</h3>
 
     <ItineraryForm v-if="loaded" :form="objData" />
 

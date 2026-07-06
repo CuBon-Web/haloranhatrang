@@ -39,7 +39,7 @@
 
 @if($hasAny)
 <aside
-    class="cbw{{ ($cbw['position'] ?? 'right') === 'left' ? ' cbw--left' : '' }}{{ ($cbw['theme'] ?? 'brand') === 'light' ? ' cbw--theme-light' : '' }}{{ !empty($cbw['above_totop']) ? ' cbw--above-totop' : '' }}"
+    class="cbw cbw--always-open{{ ($cbw['position'] ?? 'right') === 'left' ? ' cbw--left' : '' }}{{ ($cbw['theme'] ?? 'brand') === 'light' ? ' cbw--theme-light' : '' }}{{ !empty($cbw['above_totop']) ? ' cbw--above-totop' : '' }}"
     id="call-button-widget"
     aria-label="Liên hệ nhanh"
     data-cbw-phone="{{ $cbw['phone'] ?? '' }}"
@@ -102,12 +102,5 @@
             <span class="cbw__icon"><i class="fa-brands fa-facebook-messenger" aria-hidden="true"></i></span>
         </a>
     </div>
-
-    <button type="button" class="cbw__toggle" aria-expanded="false" aria-controls="call-button-widget">
-        <span class="cbw__pulse" aria-hidden="true"></span>
-        <span class="cbw__toggle-icon cbw__toggle-icon--open" aria-hidden="true"><i class="fa-solid fa-phone"></i></span>
-        <span class="cbw__toggle-icon cbw__toggle-icon--close" aria-hidden="true"><i class="fa-solid fa-xmark"></i></span>
-    </button>
-    <span class="cbw__hint" role="tooltip">{{ $cbw['hint'] ?? 'Liên hệ ngay' }}</span>
 </aside>
 @endif

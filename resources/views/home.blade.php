@@ -15,6 +15,7 @@
 @section('css')
 @include('partials.revolution-slider-styles')
 <style>
+    
     .main-slider .rs-background-video-layer iframe {
         visibility: inherit !important;
         opacity: 1 !important;
@@ -351,91 +352,188 @@
         box-shadow: 0 12px 32px rgba(10, 61, 98, 0.08);
     }
 
-    /* Home contact form */
-    .contact-section .contact-form.home-contact-form .home-contact-form__label {
-        display: block;
-        margin-bottom: 8px;
-        color: rgba(255, 255, 255, 0.92);
-        font-size: 13px;
-        font-weight: 600;
-        letter-spacing: 0.03em;
+    /* Home contact form — promo style */
+    .contact-section.home-promo-form-section {
+        position: relative;
+        /* overflow: hidden chặn backdrop-filter lấy ảnh nền phía sau */
+        overflow: visible;
     }
 
-    .contact-section .contact-form.home-contact-form .home-contact-form__control {
+    .contact-section.home-promo-form-section::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        /* Overlay nhẹ hơn để ảnh nền lộ qua khung glass — blur mới thấy rõ */
+        background: rgba(0, 0, 0, 0.28);
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    .contact-section.home-promo-form-section .auto-container {
         position: relative;
+        z-index: 1;
+    }
+
+    .contact-section.home-promo-form-section .form-column .inner-column {
+        padding: 80px 0 90px;
+    }
+
+    .home-contact-form__wrap {
+        max-width: 620px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .home-contact-form__header {
+        margin-bottom: 28px;
+        color: #fff;
+    }
+
+    .home-contact-form__eyebrow {
+        display: block;
+        margin-bottom: 10px;
+        font-family: var(--text-font);
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.88);
+    }
+
+    .home-contact-form__title {
+        margin: 0 0 14px;
+        font-family: var(--title-font);
+        font-size: clamp(30px, 4vw, 42px);
+        font-weight: 400;
+        font-style: italic;
+        line-height: 1.2;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: #fff;
+    }
+
+    .home-contact-form__desc {
+        margin: 0 auto;
+        max-width: 520px;
+        font-family: var(--text-font);
+        font-size: 14px;
+        line-height: 1.75;
+        color: rgba(255, 255, 255, 0.88);
+    }
+
+    .contact-section .contact-form.home-contact-form {
+        padding: 0;
+        background: transparent;
+        border-radius: 0;
+    }
+
+    .home-contact-form__box {
+        position: relative;
+        margin-top: 8px;
+        padding: 36px 32px 32px;
+        border: 1px solid rgba(255, 255, 255, 0.45);
+        border-radius: 20px;
+        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
+        /* Cần nền bán trong suốt — không có thì blur gần như không nhìn thấy */
+        background: rgba(0, 0, 0, 0.22);
+        backdrop-filter: blur(16px) saturate(1.15);
+        -webkit-backdrop-filter: blur(16px) saturate(1.15);
+    }
+
+    .contact-section .contact-form.home-contact-form .home-contact-form__label {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
     }
 
     .contact-section .contact-form.home-contact-form .home-contact-form__control > i {
-        position: absolute;
-        left: 16px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: var(--theme-color1);
-        font-size: 15px;
-        pointer-events: none;
-        z-index: 2;
-    }
-
-    .contact-section .contact-form.home-contact-form .home-contact-form__control--textarea > i {
-        top: 18px;
-        transform: none;
+        display: none;
     }
 
     .contact-section .contact-form.home-contact-form input:not([type=submit]):not([type=hidden]),
     .contact-section .contact-form.home-contact-form select,
     .contact-section .contact-form.home-contact-form textarea {
-        height: 54px;
-        padding: 12px 16px 12px 46px;
-        border: 1px solid rgba(255, 255, 255, 0.22);
-        border-radius: 12px;
-        background: rgba(255, 255, 255, 0.96);
-        color: var(--headings-color);
+        width: 100%;
+        height: 48px;
+        padding: 12px 22px;
+        border: 1px solid rgba(255, 255, 255, 0.85);
+        border-radius: 999px;
+        background: transparent;
+        color: #fff;
         font-size: 14px;
         line-height: 1.4;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-        transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+        box-shadow: none;
+        transition: border-color 0.25s ease, background-color 0.25s ease;
     }
 
     .contact-section .contact-form.home-contact-form select {
         appearance: none;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23af997c' d='M6 8 0 0h12z'/%3E%3C/svg%3E");
+        background-color: transparent;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23ffffff' d='M6 8 0 0h12z'/%3E%3C/svg%3E");
         background-repeat: no-repeat;
-        background-position: right 16px center;
-        padding-right: 40px;
+        background-position: right 20px center;
+        padding-right: 44px;
         cursor: pointer;
+    }
+
+    .contact-section .contact-form.home-contact-form select option {
+        color: #222;
+        background: #fff;
     }
 
     .contact-section .contact-form.home-contact-form textarea {
         height: auto;
-        min-height: 120px;
-        padding-top: 16px;
+        min-height: 48px;
+        border-radius: 24px;
+        padding-top: 14px;
+        padding-bottom: 14px;
         resize: vertical;
     }
 
     .contact-section .contact-form.home-contact-form ::placeholder {
-        color: #8a8f94;
+        color: rgba(255, 255, 255, 0.92);
+        opacity: 1;
     }
 
     .contact-section .contact-form.home-contact-form input:not([type=submit]):not([type=hidden]):focus,
     .contact-section .contact-form.home-contact-form select:focus,
     .contact-section .contact-form.home-contact-form textarea:focus {
         outline: none;
-        border-color: var(--theme-color1);
-        background: #fff;
-        box-shadow: 0 0 0 3px rgba(var(--theme-color1-rgb), 0.28), 0 10px 28px rgba(0, 0, 0, 0.14);
+        border-color: #fff;
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: none;
     }
 
     .contact-section .contact-form.home-contact-form .form-group {
-        margin-bottom: 22px;
+        margin-bottom: 14px;
     }
 
     .contact-section .contact-form.home-contact-form .home-contact-form__submit {
-        margin-top: 6px;
-        min-height: 54px;
-        border-radius: 12px !important;
+        margin-top: 8px;
+        width: 100%;
+        min-height: 48px;
+        padding: 12px 24px;
+        border: none !important;
+        border-radius: 999px !important;
+        background: #e5d1b3 !important;
+        color: #1a1a1a !important;
+        font-family: var(--text-font);
+        font-size: 14px;
         font-weight: 700;
-        letter-spacing: 0.04em;
-        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        box-shadow: none;
+    }
+
+    .contact-section .contact-form.home-contact-form .home-contact-form__submit:hover {
+        background: #d9c4a3 !important;
+        color: #000 !important;
     }
 
     .contact-section .contact-form.home-contact-form .home-contact-form__submit .btn-title {
@@ -443,12 +541,31 @@
         align-items: center;
         justify-content: center;
         gap: 8px;
+        color: inherit;
+    }
+
+    .contact-section .contact-form.home-contact-form .home-contact-form__submit .btn-title i {
+        display: inline-block;
+        font-size: 14px;
     }
 
     @media (max-width: 767.98px) {
+        .contact-section.home-promo-form-section .form-column .inner-column {
+            padding: 56px 0 64px;
+        }
+
+        .home-contact-form__box {
+            padding: 28px 20px 24px;
+            border-radius: 16px;
+        }
+
+        .home-contact-form__title {
+            font-size: 28px;
+        }
+
         .contact-section .contact-form.home-contact-form input:not([type=submit]):not([type=hidden]),
         .contact-section .contact-form.home-contact-form select {
-            height: 50px;
+            height: 46px;
             font-size: 13px;
         }
     }
@@ -531,9 +648,9 @@
                            data-y="['middle','middle','middle','middle']"
                            data-textalign="['left','left','center','center']"
                            data-frames='[{"delay":1200,"speed":1800,"frame":"0","from":"x:[-120%];o:0;z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","to":"o:1;x:0;","ease":"Power3.easeOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'>
-                           @if ($setting->company)
+                           {{-- @if ($setting->company)
                            <span class="slider-caption-stack__brand">Halora</span>
-                           @endif
+                           @endif --}}
                            @if ($item->title)
                            <h1 class="title" style="color:#fff;">{!! $item->title !!}</h1>
                            @endif
@@ -759,57 +876,67 @@
      </div>
    </div>
 </section>
-<section class="destination-section">
-   <div class="auto-container">
-     <div class="outer-box tabs-box">
-       <div class="row">
-         <div class="content-column col-xl-6 col-lg-5">
-           <div class="inner-column">
-               <h2 class="words-slide-up text-split">Hải trình</h2>
-           </div>
-         </div>
-         @if(isset($haitrinh) && $haitrinh->count())
-         <div class="content-column col-xl-6 col-lg-7">
-           <div class="inner-column">
-             <div class="default-tabs">
-               <ul class="tab-buttons clearfix">
-                 @foreach($haitrinh as $index => $item)
-                 <li class="tab-btn {{ $index === 0 ? 'active-btn' : '' }}" data-tab="#itinerary-tab-{{ $item->id }}">
-                   <span class="title">{{ $item->name }}</span>
-                 </li>
-                 @endforeach
-               </ul>
-             </div>
-           </div>
-         </div>
-       </div>
-       <div class="tabs-content">
-         <div class="icon-wheel-compass-3"></div>
-         @foreach($haitrinh as $index => $item)
-            @php
-                $mapImage = $item->map_image ? url($item->map_image) : url('/frontend/images/background/destination1-1.png');
-            @endphp
-         <div class="tab {{ $index === 0 ? 'active-tab' : '' }}" id="itinerary-tab-{{ $item->id }}">
-           <div class="tab-block itinerary-map-wrap">
-            <a href="{{route('haitrinhDetail',['slug'=>$item->slug])}}" style="width: 100%;">
-               <figure class="itinerary-map-figure">
-                  <img
-                    src="{{ $mapImage }}"
-                    alt="{{ $item->name }}"
-                    class="itinerary-map-img img-fluid"
-                    loading="lazy"
-                    decoding="async">
-                </figure>
-            </a>
-             
-           </div>
-         </div>
-         @endforeach
-       </div>
-       @endif
-     </div>
-   </div>
- </section>
+<section class="destination-section itinerary-page-section">
+    <div class="auto-container">
+        @if(isset($haitrinh) && $haitrinh->count())
+        <div class="itinerary-page__intro wow fadeInUp">
+            <h2>Khám phá hải trình</h2>
+            <p>Chọn tuyến đi phù hợp — xem mô tả và bản đồ hành trình chi tiết bên dưới.</p>
+        </div>
+
+        <div class="itinerary-page__tabs default-tabs tabs-box wow fadeInUp" data-wow-delay="150ms">
+            <ul class="itinerary-page__tab-nav tab-buttons clearfix">
+                @foreach($haitrinh as $index => $item)
+                <li class="tab-btn {{ $index === 0 ? 'active-btn' : '' }}" data-tab="#itinerary-tab-{{ $item->id }}">
+                    <span class="title">{{ $item->name }}</span>
+                </li>
+                @endforeach
+            </ul>
+
+            <div class="tabs-content">
+                @foreach($haitrinh as $index => $item)
+                @php
+                    $mapImage = $item->map_image ? url($item->map_image) : url('/frontend/images/background/destination1-1.png');
+                @endphp
+                <div class="tab itinerary-page__panel {{ $index === 0 ? 'active-tab' : '' }}" id="itinerary-tab-{{ $item->id }}">
+                    <div class="tab-block">
+                        <div class="itinerary-page__card">
+                            <div class="itinerary-page__info">
+                                <span class="itinerary-page__label">
+                                    <i class="fa fa-compass" aria-hidden="true"></i> Hải trình
+                                </span>
+                                <h3 class="itinerary-page__name">{{ $item->name }}</h3>
+                                @if(!empty($item->short_description))
+                                <p class="itinerary-page__desc">{{ $item->short_description }}</p>
+                                @endif
+                                @if(!empty($item->slug))
+                                <a href="{{ route('haitrinhDetail', ['slug' => $item->slug]) }}" class="itinerary-page__btn">
+                                    Xem chi tiết <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                </a>
+                                @endif
+                            </div>
+                            <div class="itinerary-page__map">
+                                <figure class="itinerary-page__figure">
+                                    <img
+                                        src="{{ $mapImage }}"
+                                        alt="Bản đồ {{ $item->name }}"
+                                        class="img-fluid"
+                                        loading="lazy">
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        @else
+        <div class="itinerary-page__empty">
+            <p>Hiện chưa có hải trình nào. Vui lòng quay lại sau.</p>
+        </div>
+        @endif
+    </div>
+</section>
  <section class="services-section">
     <div class="bg bg-image" data-bg-lazy="/frontend/images/pattern1-3.png"></div>
     <div class="auto-container">
@@ -848,7 +975,6 @@
    </div>
     <div class="auto-container">
         <div class="sec-title text-center">
-            <span class="sub-title">Testimonials</span>
             <h2 class="words-slide-up text-split text-white">Trải nghiệm khách hàng
             </h2>
         </div>
@@ -885,7 +1011,6 @@
    <div class="icon-plane-4 bounce-y"></div>
    <div class="auto-container">
        <div class="sec-title text-center">
-           <span class="sub-title">Latest Blog</span>
            <h2 class="words-slide-up text-split">Tin tức & Sự Kiện</h2>
        </div>
        <div class="row">
@@ -921,99 +1046,93 @@
 </section>
 <!--End Blog Section -->
 <!-- Contact Section -->
-<section class="contact-section">
+<section class="contact-section home-promo-form-section">
     <div class="bg bg-image"
-        data-bg-lazy="/frontend/images/bg-form.jpg">
+        data-bg-lazy="https://imagedelivery.net/XP6SKQ-NzRtLXs1fzgn4HA/f592cc92-e8b0-4f77-3378-a7c06cc42300/public">
     </div>
     <div class="auto-container">
         <div class="outer-box">
-            <div class="row">
-                <!-- Form Column -->
-                <div class="form-column col-lg-12">
+            <div class="row justify-content-center">
+                <div class="form-column col-lg-10 col-xl-8">
                     <div class="inner-column">
-                        <!-- Contact Form -->
-                        <div class="contact-form wow fadeInLeft home-contact-form">
-                            <div class="icon-anchor-1 bounce-y"></div>
-                            <div class="sec-title">
-                                <span class="sub-title">Contact Us</span>
-                                <h2 class="words-slide-up text-split text-white">LIÊN HỆ TƯ VẤN</h2>
+                        <div class="home-contact-form__wrap">
+                            <div class="home-contact-form__header">
+                                <span class="home-contact-form__eyebrow">Đăng ký</span>
+                                <h2 class="home-contact-form__title">Nhận thông tin ưu đãi</h2>
+                                <p class="home-contact-form__desc">Chúng tôi sẽ cập nhật cho bạn những tin tức mới nhất, cẩm nang du lịch và các ưu đãi đặc biệt.</p>
                             </div>
-                            <form id="contact_form" method="post" name="contact_form" action="{{ route('postcontact') }}">
-                                @csrf
-                                <input type="hidden" name="redirect_url" value="{{ url()->current() }}">
-                                <div class="row">
-                                    <div class="form-group col-lg-6 col-md-6">
-                                        <label class="home-contact-form__label" for="home_contact_name">Họ và tên</label>
-                                        <div class="home-contact-form__control">
-                                            <i class="far fa-user" aria-hidden="true"></i>
-                                            <input type="text" id="home_contact_name" name="name" placeholder="Nhập họ và tên" required value="{{ old('name') }}">
+                            <div class="contact-form wow fadeInUp home-contact-form">
+                                <div class="home-contact-form__box">
+                                    <form id="contact_form" method="post" name="contact_form" action="{{ route('postcontact') }}">
+                                        @csrf
+                                        <input type="hidden" name="redirect_url" value="{{ url()->current() }}">
+                                        <div class="form-group">
+                                            <label class="home-contact-form__label" for="home_contact_name">Họ và tên</label>
+                                            <div class="home-contact-form__control">
+                                                <input type="text" id="home_contact_name" name="name" placeholder="Nhập họ và tên" required value="{{ old('name') }}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group col-lg-6 col-md-6">
-                                        <label class="home-contact-form__label" for="home_contact_phone">Số điện thoại</label>
-                                        <div class="home-contact-form__control">
-                                            <i class="far fa-phone" aria-hidden="true"></i>
-                                            <input type="tel" id="home_contact_phone" name="phone" placeholder="Nhập số điện thoại" required value="{{ old('phone') }}">
+                                        <div class="form-group">
+                                            <label class="home-contact-form__label" for="home_contact_phone">Số điện thoại</label>
+                                            <div class="home-contact-form__control">
+                                                <input type="tel" id="home_contact_phone" name="phone" placeholder="Nhập số điện thoại" required value="{{ old('phone') }}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group col-lg-6 col-md-6">
-                                        <label class="home-contact-form__label" for="home_contact_service">Dịch vụ</label>
-                                        <div class="home-contact-form__control">
-                                            <i class="far fa-door-open" aria-hidden="true"></i>
-                                            <select id="home_contact_service" name="service_name">
-                                                <option value="" data-slug="" {{ old('service_name') ? '' : 'selected' }}>Chọn dịch vụ</option>
-                                                @foreach ($servicehome as $item)
-                                                @php $serviceLabel = strip_tags(languageName($item->name)); @endphp
-                                                <option value="{{ $serviceLabel }}" data-slug="{{ $item->slug }}" {{ old('service_name') == $serviceLabel ? 'selected' : '' }}>
-                                                    {{ languageName($item->name) }}
-                                                </option>
-                                                @endforeach
-                                            </select>
+                                        <div class="form-group">
+                                            <label class="home-contact-form__label" for="home_contact_service">Dịch vụ</label>
+                                            <div class="home-contact-form__control">
+                                                <select id="home_contact_service" name="service_name">
+                                                    <option value="" data-slug="" {{ old('service_name') ? '' : 'selected' }}>Chọn dịch vụ</option>
+                                                    @foreach ($servicehome as $item)
+                                                    @php $serviceLabel = strip_tags(languageName($item->name)); @endphp
+                                                    <option value="{{ $serviceLabel }}" data-slug="{{ $item->slug }}" {{ old('service_name') == $serviceLabel ? 'selected' : '' }}>
+                                                        {{ languageName($item->name) }}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <input type="hidden" id="home_contact_service_slug" name="service_cate_slug" value="{{ old('service_cate_slug') }}">
                                         </div>
-                                        <input type="hidden" id="home_contact_service_slug" name="service_cate_slug" value="{{ old('service_cate_slug') }}">
-                                    </div>
-                                    <div class="form-group col-lg-6 col-md-6">
-                                        <label class="home-contact-form__label" for="home_contact_itinerary">Hải trình</label>
-                                        <div class="home-contact-form__control">
-                                            <i class="far fa-map" aria-hidden="true"></i>
-                                            <select id="home_contact_itinerary" name="itinerary">
-                                                <option value="" {{ old('itinerary') ? '' : 'selected' }}>Chọn hải trình</option>
-                                                @foreach ($haitrinh as $item)
-                                                <option value="{{ $item->name }}" {{ old('itinerary') == $item->name ? 'selected' : '' }}>
-                                                    {{ languageName($item->name) }}
-                                                </option>
-                                                @endforeach
-                                            </select>
+                                        <div class="form-group">
+                                            <label class="home-contact-form__label" for="home_contact_itinerary">Hải trình</label>
+                                            <div class="home-contact-form__control">
+                                                <select id="home_contact_itinerary" name="itinerary">
+                                                    <option value="" {{ old('itinerary') ? '' : 'selected' }}>Chọn hải trình</option>
+                                                    @foreach ($haitrinh as $item)
+                                                    <option value="{{ $item->name }}" {{ old('itinerary') == $item->name ? 'selected' : '' }}>
+                                                        {{ languageName($item->name) }}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group col-lg-12">
-                                        <label class="home-contact-form__label" for="home_contact_email">Email</label>
-                                        <div class="home-contact-form__control">
-                                            <i class="far fa-envelope" aria-hidden="true"></i>
-                                            <input type="email" id="home_contact_email" name="email" placeholder="Nhập email (không bắt buộc)" value="{{ old('email') }}">
+                                        <div class="form-group">
+                                            <label class="home-contact-form__label" for="home_contact_email">Email</label>
+                                            <div class="home-contact-form__control">
+                                                <input type="email" id="home_contact_email" name="email" placeholder="Nhập email (không bắt buộc)" value="{{ old('email') }}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group col-lg-12">
-                                        <label class="home-contact-form__label" for="home_contact_mess">Nội dung</label>
-                                        <div class="home-contact-form__control home-contact-form__control--textarea">
-                                            <i class="far fa-comment-alt" aria-hidden="true"></i>
-                                            <textarea id="home_contact_mess" name="mess" placeholder="Nhập nội dung cần tư vấn..." rows="3">{{ old('mess') }}</textarea>
+                                        <div class="form-group">
+                                            <label class="home-contact-form__label" for="home_contact_mess">Nội dung</label>
+                                            <div class="home-contact-form__control home-contact-form__control--textarea">
+                                                <textarea id="home_contact_mess" name="mess" placeholder="Nhập nội dung cần tư vấn..." rows="3">{{ old('mess') }}</textarea>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group col-lg-12">
-                                        <input name="form_botcheck" type="hidden" value="" />
-                                        <button type="submit" class="theme-btn btn-style-one home-contact-form__submit" data-loading-text="Vui lòng chờ...">
-                                            <span class="btn-title"><i class="far fa-paper-plane"></i> Gửi yêu cầu</span>
-                                        </button>
-                                    </div>
+                                        <div class="form-group mb-0">
+                                            <input name="form_botcheck" type="hidden" value="" />
+                                            <button type="submit" class="theme-btn btn-style-one home-contact-form__submit" data-loading-text="Vui lòng chờ...">
+                                                <span class="btn-title"><i class="far fa-paper-plane"></i> Gửi yêu cầu</span>
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
- </section>
+</section>
  <!-- End Contact Section -->
 @endsection

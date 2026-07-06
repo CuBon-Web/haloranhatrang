@@ -12,8 +12,8 @@
                   <vs-th>Tên</vs-th>
                   <vs-th>Email</vs-th>
                   <vs-th>Phone</vs-th>
-                  <vs-th>Dịch vụ</vs-th>
-                  <vs-th>Hải trình</vs-th>
+                  <vs-th>Trải nghiệm</vs-th>
+                  <vs-th>Dịch vụ</vs-th>
                   <vs-th>Ngày KH</vs-th>
                   <vs-th>Số khách</vs-th>
                   <vs-th>Tin nhắn</vs-th>

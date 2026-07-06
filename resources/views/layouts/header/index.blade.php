@@ -1,6 +1,6 @@
 <header class="main-header header-style-one outer-box-position">
    <!-- Header Top -->
-   <div class="header-top">
+   {{-- <div class="header-top">
        <div class="inner-container">
            <div class="top-left">
             <ul class="social-icon-one">
@@ -19,7 +19,7 @@
                </ul>
            </div>
        </div>
-   </div>
+   </div> --}}
    <!-- Header Top -->
    <div class="header-lower">
        <!-- Main box -->
@@ -34,10 +34,11 @@
                <nav class="nav main-menu">
                    <ul class="navigation">
                        <li class="current dropdown">
-                           <a href="/">Trang chủ</a>
+                           <a href="{{route('home')}}">Trang chủ</a>
                        </li>
+                       <li><a href="{{route('aboutUs')}}">Câu chuyện thương hiệu</a></li>
                        <li class="dropdown">
-                           <a href="javascript:void(0)">Dịch vụ</a>
+                           <a href="javascript:void(0)">Trải nghiệm</a>
                            <ul>
                               @foreach ($servicehome as $item)
                               <li><a href="{{route('serviceList',['slug'=>$item->slug])}}">{{languageName($item->name)}}</a></li>
@@ -45,14 +46,13 @@
                            </ul>
                        </li>
                        <li class="dropdown">
-                           <a href="{{route('haitrinh')}}">Hải trình</a>
+                           <a href="{{route('haitrinh')}}">Dịch vụ</a>
                            <ul>
                             @foreach ($haitrinh as $item)
                             <li><a href="{{route('haitrinhDetail',['slug'=>$item->slug])}}">{{languageName($item->name)}}</a></li>
                             @endforeach
                            </ul>
                        </li>
-                       <li><a href="{{route('aboutUs')}}">Câu chuyện thương hiệu</a></li>
                        <li><a href="{{route('duanTieuBieu')}}">Ưu đãi</a></li>
                        <li class="dropdown">
                            <a href="javascript:void(0)">Tin tức & sự kiện</a>

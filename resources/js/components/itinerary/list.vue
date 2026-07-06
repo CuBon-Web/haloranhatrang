@@ -4,7 +4,7 @@
       <div class="col-md-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Danh sách hải trình</h4>
+            <h4 class="card-title">Danh sách dịch vụ</h4>
             <vs-button
               type="gradient"
               style="float: right"
@@ -14,14 +14,14 @@
             </vs-button>
             <vs-input
               icon="search"
-              placeholder="Tìm theo tên tab"
+              placeholder="Tìm theo tên dịch vụ"
               v-model="keyword"
               @keyup="searchItineraries"
             />
             <vs-table stripe :data="list" max-items="10" pagination>
               <template slot="thead">
                 <vs-th>Ảnh</vs-th>
-                <vs-th>Tên tab</vs-th>
+                <vs-th>Tên dịch vụ</vs-th>
                 <vs-th>Thứ tự</vs-th>
                 <vs-th>Trạng thái</vs-th>
                 <vs-th>Hành động</vs-th>
@@ -99,7 +99,7 @@ export default {
         type: "confirm",
         color: "danger",
         title: "Bạn có chắc chắn",
-        text: "Bạn sẽ xóa hải trình này?",
+        text: "Bạn sẽ xóa dịch vụ này?",
         accept: this.destroy,
       });
     },

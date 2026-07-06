@@ -315,7 +315,13 @@ class PageController extends Controller
 
         $data->itinerary = $request->itinerary ?: null;
         $data->departure_date = $request->departure_date ?: null;
-        $data->guest_count = $request->guest_count ?: null;
+        if ($request->filled('adult_count') || $request->filled('child_count')) {
+            $adults = max(0, (int) $request->adult_count);
+            $children = max(0, (int) $request->child_count);
+            $data->guest_count = $adults . ' người lớn, ' . $children . ' trẻ em';
+        } else {
+            $data->guest_count = $request->guest_count ?: null;
+        }
 
         $data->save();
 

@@ -13,9 +13,9 @@
 <section class="page-title" style="background-image: url({{ url('frontend/images/hai-trinh.jpg') }});">
     <div class="auto-container">
         <div class="title-outer">
-            <h1 class="title wow fadeInUp" data-wow-delay="700ms">Về Chúng Tôi</h1>
+            <h1 class="title wow fadeInUp" data-wow-delay="700ms">Halora Nha Trang Cruise</h1>
             <ul class="page-breadcrumb wow fadeInUp" data-wow-delay="900ms">
-                <li>Về Chúng Tôi</li>
+                <li>Sản phẩm từ hệ sinh thái Halora Holdings thuộc Tập Đoàn Nam Phát</li>
             </ul>
         </div>
     </div>

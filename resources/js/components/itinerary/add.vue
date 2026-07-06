@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h3 class="page-title">Thêm hải trình</h3>
+    <h3 class="page-title">Thêm dịch vụ</h3>
     <p class="text-muted mb-3">
-      Mỗi hải trình tương ứng một tab trên trang chủ (VD: Ngày, Đêm).
+      Mỗi dịch vụ tương ứng một tab trên trang chủ (VD: Ngày, Đêm).
     </p>
 
     <ItineraryForm :form="objData" />

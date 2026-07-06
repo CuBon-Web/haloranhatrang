@@ -5,13 +5,13 @@
         <div class="col-md-12 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title">Danh mục dịch vụ</h4>
-              <p class="card-description">Thêm mới hoặc sửa chửa danh mục dịch vụ</p>
+              <h4 class="card-title">Danh mục trải nghiệm</h4>
+              <p class="card-description">Thêm mới hoặc sửa chửa danh mục trải nghiệm</p>
               <vs-button
                 type="gradient"
                 style="float:right;"
                 :disabled="!$hasPermission('service.create')"
-                @click="$goIfAllowed('service.create', { name: 'add_category_service' }, 'Bạn không có quyền thêm mới danh mục dịch vụ.')"
+                @click="$goIfAllowed('service.create', { name: 'add_category_service' }, 'Bạn không có quyền thêm mới danh mục trải nghiệm.')"
               >Thêm mới</vs-button>
               <vs-table max-items="5" pagination :data="list">
                 <template slot="thead">

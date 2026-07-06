@@ -135,6 +135,11 @@
 
         syncLinks(root);
 
+        if (root.classList.contains('cbw--always-open')) {
+            root.setAttribute('data-cbw-inited', '1');
+            return root;
+        }
+
         var toggleBtn = root.querySelector('.cbw__toggle');
         if (toggleBtn) {
             toggleBtn.addEventListener('click', function (e) {

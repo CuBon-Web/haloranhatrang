@@ -5,7 +5,7 @@
           <div class="card">
             <div class="card-body">
               <div class="row">
-                <div class="col-md-3"><h4 class="card-title">Thêm mới danh mục dịch vụ</h4></div>
+                <div class="col-md-3"><h4 class="card-title">Thêm mới danh mục trải nghiệm</h4></div>
                 <div class="col-md-6"></div>
                 <div class="col-md-3">
                   </div>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="form-group">
                   <label>Ảnh đại diện</label>
-                  <image-multi-upload v-model="objData.image" :title="'danh-muc-dich-vu'" />
+                  <image-multi-upload v-model="objData.image" :title="'danh-muc-trai-nghiem'" />
                   <!-- <before-after-upload
                     v-model="compareImage"
                     :title="'danh-muc-dich-vu'"

@@ -26,7 +26,7 @@ body.service-list-page .page-wrapper {
     padding: 10px 22px;
     border-radius: 999px;
     background: linear-gradient(135deg, var(--theme-color1) 0%, var(--theme-color1-dark) 100%);
-    color: var(--theme-color2);
+    color: #fff;
     font-family: var(--title-font);
     font-size: 22px;
     font-weight: 700;

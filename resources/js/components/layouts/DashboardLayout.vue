@@ -130,7 +130,7 @@ export default {
         },
         {
           icon: "mdi mdi-newspaper menu-icon",
-          name: "Dịch vụ",
+          name: "Trải nghiệm",
           route_name: "",
           sub: [
           {
@@ -146,7 +146,7 @@ export default {
         },
         {
           icon: "mdi mdi-newspaper menu-icon",
-          name: "Hải trình",
+          name: "Dịch vụ",
           route_name: "",
           sub: [
           {
