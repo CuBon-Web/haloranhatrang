@@ -786,12 +786,12 @@
    </div>
    <div class="auto-container">
        <div class="row justify-content-center">
-           <div class="col-xl-8">
+           <div class="col-xl-10">
                <div class="outer-box">
                    <a href="{{$setting->GA}}" class="play-now"
                        data-fancybox="gallery" data-caption=""> <i class="icon fa-thin fa-play"
                            aria-hidden="true"></i> <span class="ripple"></span> </a>
-                   <h2 class="title words-slide-up text-split"> Dịch vụ tại Halora Nha Trang Cruise</h2>
+                   <h2 class="title words-slide-up text-split"> Trải nghiệm tại Halora Nha Trang Cruise</h2>
                    <div class="text">Sự kết hợp tinh tế giữa thưởng ngoạn, ẩm thực và sự kiện, kiến tạo những khoảng lặng thong thả giữa lòng đại dương.</p>
                </div>
            </div>
@@ -880,7 +880,7 @@
     <div class="auto-container">
         @if(isset($haitrinh) && $haitrinh->count())
         <div class="itinerary-page__intro wow fadeInUp">
-            <h2>Khám phá hải trình</h2>
+            <h2>Dịch vụ của chúng tôi</h2>
             <p>Chọn tuyến đi phù hợp — xem mô tả và bản đồ hành trình chi tiết bên dưới.</p>
         </div>
 
@@ -903,7 +903,7 @@
                         <div class="itinerary-page__card">
                             <div class="itinerary-page__info">
                                 <span class="itinerary-page__label">
-                                    <i class="fa fa-compass" aria-hidden="true"></i> Hải trình
+                                    <i class="fa fa-compass" aria-hidden="true"></i> Dịch vụ
                                 </span>
                                 <h3 class="itinerary-page__name">{{ $item->name }}</h3>
                                 @if(!empty($item->short_description))
@@ -937,6 +937,7 @@
         @endif
     </div>
 </section>
+@if(isset($duan) && $duan->count())
  <section class="services-section">
     <div class="bg bg-image" data-bg-lazy="/frontend/images/pattern1-3.png"></div>
     <div class="auto-container">
@@ -968,6 +969,7 @@
       </div>
     </div>
   </section>
+  @endif
 <!-- Testimonial Section -->
 <section class="testimonial-section">
     <div class="bg bg-image"
@@ -1048,7 +1050,7 @@
 <!-- Contact Section -->
 <section class="contact-section home-promo-form-section">
     <div class="bg bg-image"
-        data-bg-lazy="https://imagedelivery.net/XP6SKQ-NzRtLXs1fzgn4HA/f592cc92-e8b0-4f77-3378-a7c06cc42300/public">
+        data-bg-lazy="/frontend/images/bg-uu-dai.jpg">
     </div>
     <div class="auto-container">
         <div class="outer-box">

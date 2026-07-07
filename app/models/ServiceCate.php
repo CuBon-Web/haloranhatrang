@@ -48,6 +48,7 @@ class ServiceCate extends Model
                 $query->description = $request->description;
                 $query->price = $request->price;
                 $query->image = $image;
+                $query->sort = (int) ServiceCate::max('sort') + 1;
                 $query->save();
             }
             
@@ -60,6 +61,7 @@ class ServiceCate extends Model
             $query->description = $request->description;
             $query->price = $request->price;
             $query->image = $image;
+            $query->sort = (int) ServiceCate::max('sort') + 1;
             $query->save();
             
         }

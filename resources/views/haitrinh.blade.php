@@ -18,9 +18,9 @@ itinerary-page
 <section class="page-title style-two" style="background-image: url({{ url('frontend/images/hai-trinh.jpg') }});">
     <div class="auto-container">
         <div class="title-outer">
-            <h1 class="title wow fadeInUp" data-wow-delay="700ms">Hải trình Halora</h1>
+            <h1 class="title wow fadeInUp" data-wow-delay="700ms">Dịch vụ Halora</h1>
             <ul class="page-breadcrumb wow fadeInUp" data-wow-delay="900ms">
-                <li>Hải trình Halora</li>
+                <li>Dịch vụ Halora</li>
             </ul>
         </div>
     </div>
@@ -29,7 +29,7 @@ itinerary-page
     <div class="auto-container">
         @if(isset($itineraries) && $itineraries->count())
         <div class="itinerary-page__intro wow fadeInUp">
-            <h2>Khám phá hải trình</h2>
+            <h2>Khám phá dịch vụ</h2>
             <p>Chọn tuyến đi phù hợp — xem mô tả và bản đồ hành trình chi tiết bên dưới.</p>
         </div>
 
@@ -52,7 +52,7 @@ itinerary-page
                         <div class="itinerary-page__card">
                             <div class="itinerary-page__info">
                                 <span class="itinerary-page__label">
-                                    <i class="fa fa-compass" aria-hidden="true"></i> Hải trình
+                                    <i class="fa fa-compass" aria-hidden="true"></i> Dịch vụ
                                 </span>
                                 <h3 class="itinerary-page__name">{{ $item->name }}</h3>
                                 @if(!empty($item->short_description))

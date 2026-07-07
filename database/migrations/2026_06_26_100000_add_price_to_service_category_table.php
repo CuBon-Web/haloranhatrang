@@ -10,6 +10,9 @@ class AddPriceToServiceCategoryTable extends Migration
     {
         Schema::table('service_category', function (Blueprint $table) {
             $table->string('price', 255)->nullable()->after('description');
+            if (!Schema::hasColumn('service_category', 'sort')) {
+                $table->unsignedInteger('sort')->default(0)->after('price');
+            }
         });
     }
 
@@ -17,6 +20,9 @@ class AddPriceToServiceCategoryTable extends Migration
     {
         Schema::table('service_category', function (Blueprint $table) {
             $table->dropColumn('price');
+            if (Schema::hasColumn('service_category', 'sort')) {
+                $table->dropColumn('sort');
+            }
         });
     }
 }

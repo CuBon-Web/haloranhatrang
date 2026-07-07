@@ -59,7 +59,7 @@ class AppServiceProvider extends ServiceProvider
             ]),
             'profile' => $profile,
             'cartcontent' => session()->get('cart', []),
-            'servicehome' => ServiceCate::where('status', 1)->get(),
+            'servicehome' => $this->serviceCategoryQuery()->where('status', 1)->get(),
             'blogCate' => BlogCategory::with([
                 'typeCate' => function ($query) {
                     $query->select('id', 'slug', 'name', 'avatar', 'category_slug');
@@ -141,6 +141,16 @@ class AppServiceProvider extends ServiceProvider
         $this->attachVariantPriceRange($products);
 
         return $categories;
+    }
+
+    private function serviceCategoryQuery()
+    {
+        $query = ServiceCate::query();
+        if (Schema::hasColumn('service_category', 'sort')) {
+            return $query->orderBy('sort', 'ASC')->orderBy('id', 'DESC');
+        }
+
+        return $query->orderBy('id', 'DESC');
     }
 
     private function attachVariantPriceRange($products): void

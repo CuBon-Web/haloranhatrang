@@ -22,6 +22,16 @@ export const destroyCateService  = ({commit},opt) => {
     });
 };
 
+export const sortCateService = ({commit}, opt) => {
+    return new Promise((resolve, reject) => {
+        HTTP.post('/api/service/category/sort', opt).then(response => {
+            return resolve(response.data);
+        }).catch(error => {
+            return reject(error);
+        })
+    });
+};
+
 export const getInfoCateService  = ({commit},opt) => {
     return new Promise((resolve, reject) => {
         HTTP.get('/api/service/category/edit/'+ opt.id).then(response => {

@@ -155,6 +155,7 @@ Route::group(['namespace'=>'Api','middleware'=>'auth:api'],function(){
 		Route::group(['prefix'=>'category'], function(){
 			Route::post('add','ServiceCateController@add')->middleware('rbac.permission:service.create');
 			Route::post('list','ServiceCateController@list')->middleware('rbac.permission:service.view');
+			Route::post('sort','ServiceCateController@sort')->middleware('rbac.permission:service.update');
 			Route::get('edit/{id}','ServiceCateController@edit')->middleware('rbac.permission:service.view');
 			Route::get('delete/{id}','ServiceCateController@delete')->middleware('rbac.permission:service.delete');
 		});

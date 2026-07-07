@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\models\ServiceCate;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 class ServiceCateController extends Controller
 {
     public function add(Request $request, ServiceCate $category)
@@ -18,10 +20,21 @@ class ServiceCateController extends Controller
     public function list(Request $request)
     {
         $keyword = $request->keyword;
+        $query = ServiceCate::query();
+        if ($keyword != "") {
+            $query->where('name', 'LIKE', '%'.$keyword.'%');
+        }
+
+        if (Schema::hasColumn('service_category', 'sort')) {
+            $query->orderBy('sort', 'ASC')->orderBy('id', 'DESC');
+        } else {
+            $query->orderBy('id', 'DESC');
+        }
+
         if($keyword == ""){
-            $data = ServiceCate::orderBy('id','DESC')->get();
+            $data = $query->get();
         }else{
-            $data = ServiceCate::where('name', 'LIKE', '%'.$keyword.'%')->orderBy('id','DESC')->get()->toArray();
+            $data = $query->get()->toArray();
         }
         return response()->json([
             'data' => $data,
@@ -46,5 +59,30 @@ class ServiceCateController extends Controller
         }
         $query->delete();
         return response()->json(['message'=>'Delete Success']);
+    }
+
+    public function sort(Request $request)
+    {
+        $ids = $request->input('ids', []);
+        if (!is_array($ids) || empty($ids)) {
+            return response()->json([
+                'message' => 'Danh sách sắp xếp không hợp lệ',
+            ], 422);
+        }
+        if (!Schema::hasColumn('service_category', 'sort')) {
+            return response()->json([
+                'message' => 'Thiếu cột sort, vui lòng chạy migrate.',
+            ], 422);
+        }
+
+        DB::transaction(function () use ($ids) {
+            foreach (array_values($ids) as $index => $id) {
+                ServiceCate::where('id', (int) $id)->update(['sort' => $index + 1]);
+            }
+        });
+
+        return response()->json([
+            'message' => 'Cập nhật thứ tự thành công',
+        ]);
     }
 }
