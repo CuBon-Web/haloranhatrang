@@ -86,7 +86,7 @@
         >
             <span class="cbw__label">{{ $cbw['labels']['zalo'] ?? 'Zalo' }}</span>
             <span class="cbw__icon">
-                <img src="/frontend/callbutton/60px-Icon_of_Zalo.svg.webp" alt="" class="cbw__zalo-img" width="26" height="26" aria-hidden="true">
+                <img src="/frontend/callbutton/60px-Icon_of_Zalo.png" alt="" class="cbw__zalo-img" width="26" height="26" aria-hidden="true">
             </span>
         </a>
         <a
