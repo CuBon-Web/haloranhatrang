@@ -1,16 +1,14 @@
-{{-- EN = nội dung gốc DB. VI = Google Translate (en → vi). --}}
+{{-- VI = nội dung gốc. EN / RU = Google Translate (vi → en / ru). --}}
 <div
-    class="gt-lang wptb-element notranslate"
+    class="gt-lang gt-lang--dropdown wptb-element notranslate"
     role="group"
     aria-label="Chọn ngôn ngữ"
     data-gt-switcher
 >
-    <button type="button" class="gt-lang__btn" data-gt-lang="vi" aria-pressed="false" title="Tiếng Việt">
-        {{-- <span class="gt-lang__icon" aria-hidden="true">VI</span> --}}
-        <span>VI</span>
-    </button>
-    <button type="button" class="gt-lang__btn is-active" data-gt-lang="en" aria-pressed="true" title="English">
-        {{-- <span class="gt-lang__icon" aria-hidden="true">EN</span> --}}
-        <span>EN</span>
-    </button>
+    <i class="gt-lang__icon fal fa-globe" aria-hidden="true"></i>
+    <select class="gt-lang__select" data-gt-select aria-label="Chọn ngôn ngữ">
+        <option value="vi">Tiếng Việt</option>
+        <option value="en">English</option>
+        <option value="ru">Русский</option>
+    </select>
 </div>

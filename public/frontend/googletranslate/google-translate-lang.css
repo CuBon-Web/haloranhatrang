@@ -25,78 +25,78 @@ iframe.goog-te-banner-frame {
 }
 
 .gt-lang {
+    flex-shrink: 0;
+}
+
+.gt-lang--dropdown {
     display: inline-flex;
     align-items: center;
-    gap: 0;
-    padding: 4px;
+    gap: 6px;
+    height: 36px;
+    padding: 0 10px 0 8px;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.12);
     border: 1px solid rgb(16 16 16 / 64%);
     backdrop-filter: blur(6px);
+    margin-right: 10px;
 }
 
-.theme-style--light .header:not(.color-fixed) .gt-lang,
-.header.color-fixed .gt-lang {
+/* Desktop: trong outer-box */
+.header-lang-mobile {
+    display: none;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.mobile-menu .mobile-lang-switcher {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px 4px;
+}
+
+.theme-style--light .header:not(.color-fixed) .gt-lang--dropdown,
+.header.color-fixed .gt-lang--dropdown {
     background: rgba(250, 247, 244, 0.92);
     border-color: rgba(233, 223, 216, 0.95);
 }
 
-.gt-lang__btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 42px;
-    height: 23px;
-    padding: 0 12px;
-    border: none;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    line-height: 1;
-    cursor: pointer;
-    color: rgb(0 0 0);
-    background: transparent;
-    transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
-}
-
-.theme-style--light .header:not(.color-fixed) .gt-lang__btn,
-.header.color-fixed .gt-lang__btn {
-    color: #8c8178;
-}
-
-.gt-lang__btn:hover {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.theme-style--light .header:not(.color-fixed) .gt-lang__btn:hover,
-.header.color-fixed .gt-lang__btn:hover {
-    color: #3a3330;
-    background: rgba(185, 8, 8, 0.08);
-}
-
-.gt-lang__btn.is-active {
-    color: #fff;
-    background: linear-gradient(135deg, #ca232a 0%, #f85f65 100%);
-    box-shadow: 0 4px 14px rgba(185, 8, 8, 0.28);
-}
-
-.theme-style--light .header:not(.color-fixed) .gt-lang__btn.is-active,
-.header.color-fixed .gt-lang__btn.is-active {
-    color: #fff;
-}
-
-.gt-lang__btn:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(185, 8, 8, 0.25);
-}
-
 .gt-lang__icon {
     font-size: 14px;
-    margin-right: 5px;
-    opacity: 0.9;
+    line-height: 1;
+    color: #3a3330;
+    opacity: 0.85;
+    flex-shrink: 0;
+}
+
+.gt-lang__select {
+    min-width: 0;
+    max-width: 108px;
+    height: 100%;
+    padding: 0 18px 0 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    color: #3a3330;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%233a3330' d='M5 6 0 0h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 10px 6px;
+}
+
+.gt-lang__select:focus {
+    outline: none;
+}
+
+.gt-lang__select:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(185, 8, 8, 0.2);
+    border-radius: 6px;
 }
 
 .gt-lang.is-loading {
@@ -104,14 +104,31 @@ iframe.goog-te-banner-frame {
     pointer-events: none;
 }
 
+/* Theme ẩn toàn bộ .outer-box dưới 1200px — lang mobile đặt trong .nav-outer */
+@media (max-width: 1199.98px) {
+    .header-lang-mobile {
+        display: inline-flex;
+    }
+
+    .header-lang-mobile .gt-lang--dropdown {
+        margin-right: 0;
+        background: rgba(255, 255, 255, 0.95);
+        border-color: rgba(233, 223, 216, 0.95);
+    }
+}
+
 @media (max-width: 575px) {
-    .gt-lang__btn {
-        min-width: 34px;
-        padding: 0 10px;
+    .gt-lang--dropdown {
+        height: 34px;
+        padding: 0 8px 0 6px;
+    }
+
+    .gt-lang__select {
+        max-width: 88px;
         font-size: 11px;
     }
 
-    .gt-lang__icon {
-        display: none;
+    .header-lang-mobile {
+        margin-right: 6px;
     }
 }

@@ -1,6 +1,6 @@
 {{--  https://html.kodesolution.com/2023/voyacht-html/index.html --}}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
     @php
@@ -68,10 +68,12 @@
     <link href="/frontend/css/swiper.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/frontend/callbutton/call-button.css">
     <link href="/frontend/css/lazy-images.css" rel="stylesheet">
+    <link href="/frontend/googletranslate/google-translate-lang.css" rel="stylesheet">
     @yield('css')
 </head>
 
 <body class="@yield('body_class')">
+    <div id="google_translate_element" class="notranslate" aria-hidden="true"></div>
     <div class="page-wrapper">
         <!-- Preloader -->
         <div class="preloader"></div>
@@ -103,6 +105,7 @@
     <script src="/frontend/js/script.js"></script>
     <script src="/frontend/callbutton/call-button.js"></script>
     <script src="/frontend/js/lazy-images.js" defer></script>
+    <script src="/frontend/googletranslate/google-translate-lang.js" defer></script>
     <!-- form submit -->
     <script src="/frontend/js/jquery.validate.min.js"></script>
     <script src="/frontend/js/jquery.form.min.js"></script>

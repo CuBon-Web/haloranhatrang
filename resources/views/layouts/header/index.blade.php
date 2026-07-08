@@ -65,12 +65,16 @@
                        <li><a href="{{route('lienHe')}}">Liên hệ</a></li>
                    </ul>
                </nav>
+               <div class="header-lang-mobile notranslate">
+                   @include('partials.google-translate-lang')
+               </div>
                <div class="mobile-nav-toggler"> <span class="icon fa-sharp far fa-bars"></span> </div>
            </div>
            <!-- Outer Box -->
            <div class="outer-box">
                <div class="divider"></div>
                <!-- Btn Box -->
+               @include('partials.google-translate-lang')
                <div class="btn-box me-2 call-btn header-hotline">
                    <a href="tel:{{ $setting->phone1 }}" class="header-hotline__link"
                        aria-label="Gọi hotline {{ $setting->phone1 }}">
@@ -109,6 +113,9 @@
            <ul class="navigation clearfix">
                <!--Keep This Empty / Menu will come through Javascript-->
            </ul>
+           <div class="mobile-lang-switcher notranslate">
+               @include('partials.google-translate-lang')
+           </div>
            <ul class="contact-list-one">
                <li>
                    <i class="fa fa-phone"></i> 

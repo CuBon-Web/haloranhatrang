@@ -1,12 +1,13 @@
 /**
- * EN / VI — HTML gốc từ server là tiếng Anh (database).
- * EN = không dùng widget. VI = Google Translate (en → vi).
+ * VI / EN / RU — HTML gốc từ server là tiếng Việt.
+ * VI = không dùng widget. EN / RU = Google Translate (vi → en / ru).
  */
 (function (global) {
     'use strict';
 
-    var PAGE_LANG = 'en';
-    var DEFAULT_LANG = 'en';
+    var PAGE_LANG = 'vi';
+    var DEFAULT_LANG = 'vi';
+    var SUPPORTED_LANGS = ['vi', 'en', 'ru'];
     var STORAGE_KEY = 'gt_site_lang';
     var COOKIE_NAME = 'googtrans';
 
@@ -33,23 +34,45 @@
         });
     }
 
-    function setVietnameseCookie() {
+    function setTranslateCookie(targetLang) {
         var secure = global.location.protocol === 'https:' ? ';Secure' : '';
         purgeGoogTransCookies();
+
+        if (targetLang === PAGE_LANG) {
+            return;
+        }
+
         document.cookie =
             COOKIE_NAME +
             '=' +
-            encodeURIComponent('/' + PAGE_LANG + '/vi') +
+            encodeURIComponent('/' + PAGE_LANG + '/' + targetLang) +
             ';path=/;max-age=31536000;SameSite=Lax' +
             secure;
+    }
+
+    function parseLangFromCookie(cookie) {
+        if (!cookie) {
+            return DEFAULT_LANG;
+        }
+
+        var parts = cookie.split('/').filter(Boolean);
+        if (parts.length >= 2) {
+            var target = parts[parts.length - 1].toLowerCase();
+            if (SUPPORTED_LANGS.indexOf(target) !== -1) {
+                return target;
+            }
+        }
+
+        return DEFAULT_LANG;
     }
 
     function stripTranslateArtifacts() {
         var html = document.documentElement;
         if (html) {
             html.classList.remove('translated-ltr', 'translated-rtl');
-            html.removeAttribute('lang');
+            html.setAttribute('lang', PAGE_LANG);
         }
+
         document.querySelectorAll('font[style*="vertical-align"]').forEach(function (node) {
             var parent = node.parentNode;
             if (!parent) {
@@ -64,36 +87,38 @@
 
     function getSavedLang() {
         try {
+            if (!global.localStorage.getItem('gt_site_lang_v2')) {
+                var legacy = global.localStorage.getItem(STORAGE_KEY);
+                if (legacy === 'en') {
+                    global.localStorage.setItem(STORAGE_KEY, 'vi');
+                }
+                global.localStorage.setItem('gt_site_lang_v2', '1');
+            }
+
             var stored = global.localStorage.getItem(STORAGE_KEY);
-            if (stored === 'en' || stored === 'vi') {
+            if (stored && SUPPORTED_LANGS.indexOf(stored) !== -1) {
                 return stored;
             }
         } catch (e) {}
 
-        var cookie = readCookie();
-        if (cookie.indexOf('/vi') !== -1) {
-            return 'vi';
-        }
-
-        return DEFAULT_LANG;
+        return parseLangFromCookie(readCookie());
     }
 
     function shouldUseTranslate() {
-        return getSavedLang() === 'vi';
+        return getSavedLang() !== PAGE_LANG;
     }
 
-    function updateButtons() {
+    function updateSelects() {
         var active = getSavedLang();
-        document.querySelectorAll('.gt-lang [data-gt-lang]').forEach(function (btn) {
-            var lang = btn.getAttribute('data-gt-lang');
-            var isActive = lang === active;
-            btn.classList.toggle('is-active', isActive);
-            btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        document.querySelectorAll('[data-gt-select]').forEach(function (select) {
+            if (select.value !== active) {
+                select.value = active;
+            }
         });
     }
 
     function switchLanguage(lang) {
-        if (lang !== 'vi' && lang !== 'en') {
+        if (SUPPORTED_LANGS.indexOf(lang) === -1) {
             return;
         }
         if (lang === getSavedLang()) {
@@ -108,18 +133,34 @@
             global.localStorage.setItem(STORAGE_KEY, lang);
         } catch (e) {}
 
-        if (lang === 'vi') {
-            setVietnameseCookie();
-        } else {
+        if (lang === PAGE_LANG) {
             purgeGoogTransCookies();
+        } else {
+            setTranslateCookie(lang);
         }
 
         global.location.reload();
     }
 
+    function applyTranslateCombo(targetLang) {
+        var combo = document.querySelector('select.goog-te-combo');
+        if (!combo || !targetLang || targetLang === PAGE_LANG) {
+            return;
+        }
+
+        if (combo.value !== targetLang) {
+            combo.value = targetLang;
+            combo.dispatchEvent(new Event('change'));
+        }
+    }
+
     function loadGoogleTranslate() {
+        var targetLang = getSavedLang();
+
         if (!shouldUseTranslate()) {
+            purgeGoogTransCookies();
             stripTranslateArtifacts();
+            updateSelects();
             return;
         }
 
@@ -127,32 +168,32 @@
             return;
         }
 
-        setVietnameseCookie();
+        setTranslateCookie(targetLang);
 
         global.googleTranslateElementInit = function () {
             if (!global.google || !global.google.translate) {
-                updateButtons();
+                updateSelects();
                 return;
             }
 
             new global.google.translate.TranslateElement(
                 {
                     pageLanguage: PAGE_LANG,
-                    includedLanguages: 'en,vi',
+                    includedLanguages: SUPPORTED_LANGS.join(','),
                     autoDisplay: false,
                 },
                 'google_translate_element'
             );
 
-            updateButtons();
+            updateSelects();
 
             global.setTimeout(function () {
-                var combo = document.querySelector('select.goog-te-combo');
-                if (combo && combo.value !== 'vi') {
-                    combo.value = 'vi';
-                    combo.dispatchEvent(new Event('change'));
-                }
+                applyTranslateCombo(targetLang);
             }, 300);
+
+            global.setTimeout(function () {
+                applyTranslateCombo(targetLang);
+            }, 1000);
         };
 
         var script = document.createElement('script');
@@ -163,30 +204,25 @@
     }
 
     function bindSwitchers() {
-        document.querySelectorAll('.gt-lang').forEach(function (root) {
-            if (root.getAttribute('data-gt-inited') === '1') {
+        document.querySelectorAll('[data-gt-select]').forEach(function (select) {
+            if (select.getAttribute('data-gt-inited') === '1') {
                 return;
             }
 
-            root.querySelectorAll('[data-gt-lang]').forEach(function (btn) {
-                btn.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    switchLanguage(btn.getAttribute('data-gt-lang'));
-                });
+            select.addEventListener('change', function () {
+                var lang = select.value;
+                if (lang !== getSavedLang()) {
+                    switchLanguage(lang);
+                }
             });
 
-            root.setAttribute('data-gt-inited', '1');
+            select.setAttribute('data-gt-inited', '1');
         });
 
-        updateButtons();
+        updateSelects();
     }
 
     function init() {
-        if (!shouldUseTranslate()) {
-            purgeGoogTransCookies();
-            stripTranslateArtifacts();
-        }
-
         bindSwitchers();
         loadGoogleTranslate();
     }
